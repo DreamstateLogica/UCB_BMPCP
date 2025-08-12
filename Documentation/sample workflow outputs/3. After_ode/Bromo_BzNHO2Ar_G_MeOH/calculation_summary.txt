@@ -1,0 +1,41 @@
+--- Calculation Settings Summary ---
+Timestamp: 20250715_094033
+Input source: File - Bromo_BzNHO2Ar_G_MeOH.smi
+Number of SMILES processed: 1
+ORCA Executable: C:\ORCA\orca.exe
+ORCA Cores per Job: 16
+Functional: M062X
+Basis Set: Def2-TZVP
+Dispersion: None
+Solvent: methanol
+Redox Calculation Mode: reduction
+Energy Type Used for Delta: gibbs (Uses Freq!)
+Optional ORCA Keywords: TightSCF=True, SlowConv=True
+Main Output Directory: C:\Users\Toste Lab\Documents\calcs\Bromo_BzNHO2Ar_G_MeOH
+----------------------------------------
+
+--- Redox Potential Calculation Summary ---
+Timestamp: 2025-07-15 09:40:33
+Calculation Mode: reduction
+Energy Type Used for Delta: Gibbs (Runs Freq!)
+Optional ORCA Keywords: TightSCF=True, SlowConv=True
+Using Solvation Model: CPCM(methanol)
+Using reference potential for SCE in methanol: E_ref=-0.210 V vs SHE
+
+Total processing time: 12686.03 seconds
+
+--- Overall Results ---
+No oxidation potentials were successfully calculated and referenced.
+Molecule most easily REDUCED (Highest E_red): O=C(NOC(C1=CC=C(Br)C=C1)=O)C2=CC=CC=C2 (-1.764 V vs SCE in methanol)
+
+--- Detailed Results ---
+* Potentials calculated using Delta Gibbs and Literature Formula: E = - (E_N - E_Ion) / F - E_abs_SHE - E_ref_vs_SHE
+* Frequency calculation performed on required states for minimum validation.
+* Reference Electrode: vs SCE in methanol (E_abs_SHE=4.281V, E_ref=-0.210V)
+* WARNING: Ensure values in SCE_REF_POTENTIALS_VS_SHE dictionary are accurate and appropriate!
+Index: 1 | SMILES: O=C(NOC(C1=CC=C(Br)C=C1)=O)C2=CC=CC=C2
+  Directory: .\Bromo_BzNHO2Ar_G_MeOH\mol_1\
+  G_Neutral: -3393.942314 H
+  G_Anion:   -3394.027084 H
+  E_red vs Ref: -1.764 V
+--------------------

@@ -1,0 +1,31 @@
+
+[MACOS] Necessary execution path and example inputs.
+------------------------------------------------------
+cd /Users/apollyon/Documents/C_CAS/Computations/Bromo_BzNHO2pCO2Me_G_MeOH/mol_1
+
+"/Users/apollyon/Documents/C_CAS/Programs/orca-data-extraction/orca_data_extraction/src/orca_out_to_xlsx.py" gen_input.json new_amidyl_master all
+
+[RXIV]
+"/Users/apollyon/Documents/C_CAS/Programs/orca-data-extraction/orca_data_extraction/src/orca_out_to_csv.py" molecule_neutral_opt_freq.out gen_input.json thermo8
+
+------------------------------------------------------
+
+
+[WINDOWS] Necessary execution path and example inputs.
+------------------------------------------------------
+[FOR BROMO]
+cd "C:\Users\Toste Lab\Documents\calcs\Bromo_BzNHO2pCO2Me_G_MeOH\mol_1"
+
+"C:\Users\Toste Lab\Documents\calcs\orca-data-extraction\orca_data_extraction\src\orca_out_to_csv.py" molecule_neutral_opt_freq.out Br_Anion_input_skip.json thermo6
+
+
+[For PPh3]
+cd "C:\Users\Toste Lab\Documents\calcs\orca-data-extraction\orca_data_extraction\tests"
+
+"C:\Users\Toste Lab\Documents\calcs\orca-data-extraction\orca_data_extraction\src\orca_out_to_csv.py" PPh3_opt.out PPh3_input_skip.json nmex1
+
+
+[From src directory]
+orca_out_to_csv.py "C:\Users\Toste Lab\Documents\calcs\orca-data-extraction\orca_data_extraction\tests\PPh3_opt.out" PPh3_test_input.json nmex1
+
+------------------------------------------------------

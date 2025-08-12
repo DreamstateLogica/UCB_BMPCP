@@ -1,0 +1,10 @@
+{
+  "initial_geometry_atom_labels": [],
+  "final_geometry_atom_labels": [],
+  "bond_length_data_labels": [],
+  "bond_angle_data_labels": [],
+  "mulliken_charge_atom_labels": [],
+  "mulliken_charge_sum_atom_label_lists":  [],
+  "loewdin_charge_atom_labels": [],
+  "loewdin_charge_sum_label_lists": []
+}
