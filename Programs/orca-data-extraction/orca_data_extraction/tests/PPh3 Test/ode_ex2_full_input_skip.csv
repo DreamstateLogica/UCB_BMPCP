@@ -1,0 +1,2 @@
+script_input_filename,orca_out_filename,polarizability.alpha_xx,polarizability.alpha_xy,polarizability.alpha_xz,polarizability.alpha_yx,polarizability.alpha_yy,polarizability.alpha_yz,polarizability.alpha_zx,polarizability.alpha_zy,polarizability.alpha_zz,polarizability.alpha,dipole_moments.x,dipole_moments.y,dipole_moments.z,dipole_moments.tot,homo_lumo_energies.homo_energy,homo_lumo_energies.lumo_energy
+PPh3_input_skip.json,PPh3_opt.out,,,,,,,,,,,0.11095,-0.44712,0.20670,0.50493,-5.2494,-1.6248

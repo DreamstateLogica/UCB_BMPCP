@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""
+The THERMOCHEMISTRY class searches for and stores the HOMO and LUMO energy
+data from an ORCA .out file.
+"""
+__author__ = "Peter Waddell"
+__copyright__ = "Copyright 2024"
+__credits__ = ["Peter Waddell"]
+__version__ = "0.1.0"
+__date__ = "2024/02/26"
+__maintainer__ = "Peter Waddell"
+__email__ = "pmwaddell9@gmail.com"
+__status__ = "Prototype"
+
+import re
+
+from orca_data_extraction.src.data_section import DataSection
+
+
+class THERMOCHEMISTRY(DataSection):
+    """
+    Finds and stores thermochemical energies from a ORCA .out file.
+
+    Attributes
+    ----------
+    __regex : str
+        Regular expression string used to search the .out file for the
+        thermochemical energies.
+
+    Methods
+    -------
+    _find_data
+        Search the .out file for thermochemical energies, return as dict.
+    """
+    def __init__(self, out_filename, outfile_contents):
+        """
+        Parameters
+        ----------
+        out_filename : str
+            Name of the ORCA .out file that will be searched.
+        outfile_contents : str
+            String containing the full text of the ORCA .out file.
+        """
+        # Here I am assuming that the last occurrence of the MO energy data in
+        # the .out file will be from the finished calculation, seems logical...
+
+        # However, I found that in order to find the last occurrence without
+        # catastrophic backtracking, it was necessary to reverse the line order
+        # of the outfile contents string, then match the first occurrence there.
+
+        # Note that, consequently, this regex string is INVERTED to match!!!
+        # Note also: \ must be used for all whitespace I want to count
+        # when using verbose regular expressions.
+        self.__regex = re.compile(
+            r"""
+            Eh                  # Match the units "Eh"
+            \s+                 # Match one or more whitespace characters
+            (-?[\d]+[.][\d]+)   # CAPTURE GROUP 1: The Gibbs Free Energy value
+            \s+                 # Match one or more whitespace characters
+            \.\.\.              # Match the literal "..."
+            \s+
+            (ygnere\ eerf\ sbbG\ laniF) # CAPTURE GROUP 2: "Final Gibbs free energy" backwards
+            """,
+            flags=re.VERBOSE | re.DOTALL
+        )
+        super().__init__(out_filename, outfile_contents)
+        self._section_name = 'Final Gibbs Free Energy'
+
+    def _find_data(self):
+        """
+        Search the .out file for thermochemical energies, return as dict.
+
+        Returns
+        -------
+        dict
+            Dictionary containing thermochemical energies as keys and the
+            corresponding energy values (in eV) as values (as strings).
+
+        Raises
+        ------
+        AttributeError
+            This occurs when the regex fails to find what it is looking
+            for, and returns NoneType. Then, .group(n) gives this error.
+        """
+        def __reverse_string_by_lines(s):
+            """
+            Reverses a string in terms of the order of its lines.
+
+            Parameters
+            ----------
+            s: str
+                String to be reversed line-by-line
+
+            Returns
+            -------
+            str
+                Reversed string, line-by-line.
+            """
+            s = s.splitlines()[::-1]
+            return '\n'.join(s)
+        # See above comments: in order to match the LAST occurrence of the MO
+        # energy data in the .out file, the contents must be reversed.
+        reversed_contents = \
+            __reverse_string_by_lines(self._outfile_contents)
+        try:
+            result = self.__regex.search(reversed_contents)
+            gibbs_free_energy = result.group()
+            entropy = result.group()
+            enthalpy = result.group()
+            ZPE = result.group()
+            electronic_energy = result.group()
+            return {'Gibbs free energy (G)': gibbs_free_energy, 'Entropy (S)': entropy, 'Enthalpy (H)': enthalpy, 'Zero-point Energy': ZPE, 'Electronic energy', electronic_energy}
+        except AttributeError:
+            print(f'Thermochemical energies not found in '
+                  f'{self._out_filename}')
+            return {'Gibbs free energy (G)': None, 'Entropy (S)': None, 'Enthalpy (H)': None, 'Zero-point Energy': None, 'Electronic energy', None}
+
