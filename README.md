@@ -14,11 +14,9 @@ UCB_BMPCP is an open-source computational chemistry research tool developed at t
 
 ### Primary Use Cases
 
-- High-throughput screening of molecular candidates
-- Redox potential prediction for electrochemical applications
-- Structure-property relationship studies
-- Computational chemistry workflow automation
-- Quantum chemical data aggregation and analysis
+- Open-source and free computational chemistry workflow automation
+- High-throughput computational screening of 3D molecular descriptors
+- Elucidation of reaction mechanism and yield optimization through structure-property relationship studies
 
 ## Architecture
 
